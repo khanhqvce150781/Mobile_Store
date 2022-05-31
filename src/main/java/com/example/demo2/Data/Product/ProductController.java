@@ -37,8 +37,8 @@ public class ProductController {
 
     }
     @PostMapping("/products/add")
-    public String addNewProduct(Model model, Product product, @RequestParam("Pictures") MultipartFile multipartFile) throws IOException {
-
+    public String addNewProduct(Model model, Product product, @RequestParam("Pictures") MultipartFile multipartFile, RedirectAttributes r) throws IOException {
+         try{
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
         product.setPicture(fileName);
         service.save(product);
@@ -54,8 +54,11 @@ public class ProductController {
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ioe) {
             throw new IOException("Could not save image file: " + fileName, ioe);
-        }
-
+        }} catch (Exception e){
+             r.addFlashAttribute("messF", "Save Fail!!!");
+             return "redirect:/products/showw";
+         }
+        r.addFlashAttribute("mess", "Save Successfully!!!");
         return "redirect:/products/showw";
     }
 @GetMapping("/products/showAllpro")

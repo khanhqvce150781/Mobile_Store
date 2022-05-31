@@ -39,6 +39,9 @@
     <p>All the selected products in your cart</p>
   </div>
 </div>
+<div th:if="${mess}" class="alert alert-success text-center">
+  [[${mess}]]
+</div>
 <div class="user-cart">
   <div class="cart-button">
     <a class="clear btn btn-danger" value="clear" name="clear" th:href="@{/cart/clear}">
