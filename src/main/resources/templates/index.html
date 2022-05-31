@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="../static/login.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+    .header{
+        margin: 0px;
+        background-color: #eeeeee;
+        padding: 40px 20px 40px 20px;
+        font-size: 70px;
+    }
+    .login-form{
+        border: 1px solid;
+        border-color: #ebebeb;
+        width: 400px;
+        margin: 16px auto;
+        font-size: 16px;
+    }
+    .login-form p{
+        background-color: #f5f5f5;
+        padding: 5px 10px ;
+        margin-top: 0px;
+        border-bottom: 1px solid;
+        border-color: #ebebeb;
+    }
+    .login-form input{
+        display: block;
+        margin: 15px auto;
+        width: 95%;
+        border-width: 1px;
+        border-style: solid;
+        padding: 5px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding: 5px 10px;
+        border-color: #d9d9d9;
+    }
+    .login-form button{
+        width:95%;
+        margin: 0px 10px;
+        color: white;
+        background-color: #5cb85c;
+    }
+    .login-form button:hover{
+        color: white;
+        background-color: #49984b;
+    }
+
+</style>
+<body>
+<p class="header">Mobile Store</p>
+<div th:if="${mess}" class="alert alert-success text-center">
+    [[${mess}]]
+</div>
+<div th:if="${messfalse}" class="alert alert-danger text-center">
+    [[${messfalse}]]
+</div>
+<div class="login-form">
+    <p class="login-title">Please sign in</p>
+    <form class="login-container" th:action="@{/login}" method="post" th:object="${formuser}">
+        <input type="text" class="username"   placeholder="User Name" th:field="*{user_Name}"name="user_Name"/>
+        <input type="password" class="password" placeholder="Password" th:field="*{password}" name="password"/>
+        <button class="login-submit btn" value="login" name="login-submit">Login</button>
+    </form>
+</div>
+</body>
+</html>

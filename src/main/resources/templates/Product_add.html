@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Add Product</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<style>
+    .header{
+        width: 100%;
+        margin: 0px;
+        background-color: #eeeeee;
+        padding: 40px 20px 40px 20px;
+        display: inline-flex;
+    }
+    .header button{
+        height: 40px;
+        margin-left: 83%;
+    }
+    .AddProducts .Add-title{
+        margin-top: 20px;
+        margin-left: 50px;
+        font-size: 30px;
+        border-bottom:1px solid #d9d9d9;
+        width: 90%;
+    }
+    .AddProducts .properties{
+        margin-top: 10px;
+        display: flex;
+    }
+    .properties p{
+        text-align: right;
+    }
+    .AddProducts input, .product-des, .product-condition{
+        margin-left: 15px;
+    }
+    .add-product{
+        margin-left: 17.5%;
+    }
+    label{
+        margin-right: 10px;
+    }
+
+</style>
+<body>
+<div class="header">
+    <div>
+        <h1>Product</h1>
+        <p>Add products</p>
+    </div>
+    <button class="logout btn btn-danger" value="logout" name="logout-submit" >Logout</button>
+</div>
+<div class="AddProducts">
+    <p class="Add-title">Add new product</p>
+    <form th:action="@{/products/add}" class="addproduct-container"  th:object="${product}" method="post" enctype="multipart/form-data">
+        <div class="properties">
+            <p class="Add-name col-md-2">Product Name</p>
+            <input type="text" class="product-name" name="product-name" th:field="*{product_name}" required maxlength="45"/>
+        </div>
+        <div class="properties">
+            <p class="Add-price col-md-2">Unit Price</p>
+            <input input type="number" class="product-price" name="product-price"th:field="*{price}" required min="0"/>
+        </div>
+        <div class="properties">
+            <p class="Add-stock col-md-2">Unit in Stock</p>
+            <input type="number" class="product-stock" name="product-stock" th:field="*{stock}" required min="1"/>
+        </div>
+        <div class="properties">
+            <p class="Add-description col-md-2">Description</p>
+            <textarea class="product-des" name="product-des" rows="2" th:field="*{description}"></textarea>
+        </div>
+        <div class="properties">
+            <p class="Add-manufacturer col-md-2">Manufacturer</p>
+            <input type="text" class="product-manufacturer" name="product-manufacturer" th:field="*{manufacturer}"/>
+        </div>
+        <div class="properties">
+            <p class="Add-category col-md-2">Category</p>
+            <input type="text" class="product-category" name="product-category" th:field="*{category}"/>
+        </div>
+        <div class="properties">
+            <p class="Add-condition col-md-2">Condition</p>
+            <div class="product-condition">
+                <input type="radio" id="new" name="condition" value="1" th:field="*{condition_id}"/>
+                <label for="new">New</label>
+                <input type="radio" id="old" name="condition" value="2" th:field="*{condition_id}"/>
+                <label for="old">Old</label>
+                <input type="radio" id="refurbished" name="condition" value="3" th:field="*{condition_id}"/>
+                <label for="refurbished">Refurbished</label>
+            </div>
+        </div>
+        <div class="properties">
+            <p class="Add-img col-md-2">Product Image File</p>
+            <input type="file" class="product-file" name="Pictures" accept="image/png, image/jpeg"/>
+        </div>
+        <button class="add-product btn btn-primary" type="submit" value="add-product" name="add-product">Add Product</button>
+    </form>
+</div>
+</body>
+</html>
